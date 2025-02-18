@@ -7,10 +7,8 @@ module Main where
 
 import Fmt
     (
-        (+|),
-        (|+),
-        fmt,
-        fmtLn,
+        (+|), (|+),
+        fmt, fmtLn,
         indentF,
         Buildable(..),
         Builder
@@ -32,9 +30,10 @@ data TraceData :: Type where
 instance Buildable TraceData where
     build :: TraceData -> Builder
     build (TraceData msg _ _ arg output) =
-        "TraceData:\n\tmessage: " +| msg |+
-            "\n\targs: " +| arg |+
-            "\n\toutput: " +| output |+ "\n"
+        "TraceData:\n"
+        <> "\tmessage: "+| msg    |+"\n"
+        <> "\targs: "   +| arg    |+"\n"
+        <> "\toutput: " +| output |+"\n"
 
 instance Show TraceData where
     show = fmt . build
